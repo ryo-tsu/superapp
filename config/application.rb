@@ -14,6 +14,12 @@ module Superapp
     config.generators do |g|
       g.assets false          # CSS, JavaScriptファイルは生成しない
       g.test_framework false  # testファイルは生成しない
+      g.test_framework :rspec,
+        controller_specs: false,
+        view_specs: false,
+        helper_specs: false,
+        routing_specs: false
+      end
     end
 
     # Settings in config/environments/* take precedence over those specified here.
