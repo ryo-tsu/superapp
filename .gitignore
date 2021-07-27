@@ -25,3 +25,6 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# ここにGemファイルの実体が保存されているためコミットしない。それぞれの環境でbundleすれば良いので
+/vendor
