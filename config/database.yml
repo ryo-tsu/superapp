@@ -83,3 +83,6 @@ production:
   database: superapp_production
   username: superapp
   password: <%= ENV['SUPERAPP_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
