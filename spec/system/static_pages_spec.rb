@@ -20,11 +20,11 @@ RSpec.describe "StaticPages", type: :system do
       before do
         visit about_path
       end
-  
+
       it "世田谷市場とは？の文字列が存在することを確認" do
         expect(page).to have_content '世田谷市場とは？'
       end
-  
+
       it "正しいタイトルが表示されることを確認" do
         expect(page).to have_title full_title('世田谷市場とは？')
       end

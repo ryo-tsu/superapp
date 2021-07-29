@@ -40,6 +40,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rails-controller-testing'
   gem 'sqlite3' # sqlite3
+  gem 'rubocop-airbnb'
 end
 
 group :development do
