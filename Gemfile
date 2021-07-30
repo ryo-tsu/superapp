@@ -33,6 +33,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'faker'
 
 group :development, :test do
   gem 'rspec-rails', '~> 4.0.0.beta2'
@@ -41,6 +42,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'sqlite3' # sqlite3
   gem 'rubocop-airbnb'
+  gem "factory_bot_rails", "~> 4.10.0"
 end
 
 group :development do
