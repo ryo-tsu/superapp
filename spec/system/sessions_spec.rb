@@ -38,13 +38,13 @@ RSpec.describe "Sessions", type: :system do
 
     context "ログイン処理" do
       it "無効なユーザーでログインを行うとログインが失敗することを確認" do
-        fill_in "user_email",	with: "user@example.com"
-        fill_in "user_password",	with: "pass"
+        fill_in "user_email", with: "user@example.com"
+        fill_in "user_password", with: "pass"
         click_button "ログイン"
         expect(page).to have_content "メールアドレスとパスワードの組み合わせが違います"
 
         visit root_path
-        expect(page).not_to have_content "メールアドレスとパスワードの組み合わせが違います"  
+        expect(page).not_to have_content "メールアドレスとパスワードの組み合わせが違います"
       end
 
       it "有効なユーザーでログインする前後でヘッダーが正しく表示されていることを確認" do
@@ -52,11 +52,11 @@ RSpec.describe "Sessions", type: :system do
         expect(page).to have_link 'ユーザー登録(無料)', href: signup_path
         expect(page).to have_link 'ログイン', href: login_path
         expect(page).not_to have_link 'ログアウト', href: logout_path
-        
+
         fill_in "user_email", with: user.email
-        fill_in "user_password",	with: user.password
+        fill_in "user_password", with: user.password
         click_button "ログイン"
-        
+
         expect(page).to have_link "世田谷市場とは？", href: about_path
         expect(page).to have_link "プロフィール", href: user_path(user)
         expect(page).to have_link 'ログアウト', href: logout_path

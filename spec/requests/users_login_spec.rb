@@ -25,7 +25,7 @@ RSpec.describe "ログイン", type: :request do
   it "無効なユーザーでログイン" do
     get login_path
     post login_path, params: { session: { email: "xxx@example.com",
-                                         password: user.password } }
+                                          password: user.password } }
     expect(is_logged_in?).not_to be_truthy
   end
 end
