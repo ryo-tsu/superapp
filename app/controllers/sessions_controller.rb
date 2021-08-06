@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       # sessionをつなぐ。application_controllerにsessions_helperをincludeしている
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       # チェクボックスがチェックされていたらcookieにidとトークンを保存する
-      redirect_to user
+      redirect_back_or user
     else
       flash.now[:danger] = 'メールアドレスとパスワードの組み合わせが違います'
       render 'new'
