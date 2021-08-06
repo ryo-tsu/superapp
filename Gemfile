@@ -36,6 +36,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bcrypt', '3.1.13'
 gem 'faker'
 gem 'jquery-rails', '4.3.1'
+gem 'will_paginate',           '3.1.7'
+gem 'bootstrap-will_paginate', '1.0.0'
 
 group :development, :test do
   gem 'rspec-rails', '~> 4.0.0.beta2'
