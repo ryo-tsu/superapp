@@ -8,5 +8,10 @@ FactoryBot.define do
     trait :admin do
       admin { true }
     end
+
+    trait :activated do
+      atcivated { true }
+      activated_at { Time.zone.now }
+    end
   end
 end
