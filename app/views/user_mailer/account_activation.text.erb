@@ -1,0 +1,5 @@
+<%= @user.name　様 %>
+
+この度は世田谷市場へのご登録、誠にありがとうございます。
+登録を完了させるために、以下のリンクをクリックしてください。
+  <%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
