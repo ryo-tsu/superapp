@@ -16,7 +16,7 @@ before_action :correct_user,   only: [:edit, :update]
   def create
     @user = User.new(user_params)
     if @user.save
-      UserMailer.account_activation(@user).deliver_now
+      @user.send_activation_email
       flash[:info] = "アカウント有効化のためのメールを送信しました"
       redirect_to root_url
       # log_in @user
