@@ -10,5 +10,9 @@ FactoryBot.define do
     trait :admin do
       admin { true }
     end
+
+    trait :password_reset do
+      admin { true }
+    end
   end
 end
