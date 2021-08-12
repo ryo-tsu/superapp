@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :system do
+  include ActiveJob::TestHelper
   let!(:user) { create(:user) }
   let!(:admin_user) { create(:user, :admin) }
 
@@ -53,12 +54,29 @@ RSpec.describe "Users", type: :system do
 
     context "ユーザー登録処理" do
       it "有効なユーザーでユーザー登録を行うとユーザー登録成功のフラッシュが表示されること" do
-        fill_in "ユーザー名", with: "Example User"
-        fill_in "メールアドレス", with: "user@example.com"
-        fill_in "パスワード", with: "password"
-        fill_in "パスワード(確認)", with: "password"
-        click_button "登録する"
-        expect(page).to have_content "アカウント有効化のためのメールを送信しました"
+        perform_enqueued_jobs do
+          expect {
+            fill_in "ユーザー名", with: "Example User"
+            fill_in "メールアドレス", with: "user@example.com"
+            fill_in "パスワード", with: "password"
+            fill_in "パスワード(確認)", with: "password"
+            click_button "登録する"
+          }.to change(User, :count).by(1)
+          expect(current_path).to eq root_path
+          expect(page).to have_content "アカウント有効化のためのメールを送信しました"
+        end
+
+          mail = ActionMailer::Base.deliveries.last
+
+          aggregate_failures do
+            expect(mail.to).to eq ["user@example.com"]
+            expect(mail.subject).to eq "世田谷市場のアカウントを有効にします"
+          end
+
+          # this_user = assigns(:user)#User.find_by(email: "user@example.com")
+          # visit edit_account_activation_path(this_user.activation_token, email: this_user.email)
+          # expect(current_path).to eq user_path(this_user)
+          # expect(page).to have_content "ユーザー登録が完了しました。"
       end
 
       it "無効なユーザーでユーザー登録を行うとユーザー登録失敗のフラッシュが表示されること" do
