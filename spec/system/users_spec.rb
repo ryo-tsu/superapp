@@ -72,11 +72,10 @@ RSpec.describe "Users", type: :system do
             expect(mail.to).to eq ["user@example.com"]
             expect(mail.subject).to eq "世田谷市場のアカウントを有効にします"
           end
-
-          # this_user = assigns(:user)#User.find_by(email: "user@example.com")
-          # visit edit_account_activation_path(this_user.activation_token, email: this_user.email)
-          # expect(current_path).to eq user_path(this_user)
-          # expect(page).to have_content "ユーザー登録が完了しました。"
+        # this_user = assigns(:user)#User.find_by(email: "user@example.com")
+        # visit edit_account_activation_path(this_user.activation_token, email: this_user.email)
+        # expect(current_path).to eq user_path(this_user)
+        # expect(page).to have_content "ユーザー登録が完了しました。"
       end
 
       it "無効なユーザーでユーザー登録を行うとユーザー登録失敗のフラッシュが表示されること" do
