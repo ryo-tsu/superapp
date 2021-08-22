@@ -36,7 +36,7 @@ RSpec.describe UserMailer, type: :mailer do
     end
   end
 
-  describe "password_reset" do
+  describe "パスワード再設定" do
     before do
       user.create_reset_digest
     end
