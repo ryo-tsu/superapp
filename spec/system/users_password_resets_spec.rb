@@ -131,5 +131,22 @@ RSpec.describe "ユーザーパスワード再設定", type: :system do
         expect(current_path).to eq password_reset_path(user.reset_token)
       end
     end
+
+    context "トークンの有効期限が切れている" do
+      before do
+        user.update_attribute(:reset_sent_at, 3.hours.ago)
+        fill_in "パスワード", with: "foobaz"
+        fill_in "パスワード(確認)", with: "foobaz"
+        click_button "パスワード更新"
+      end
+
+      it "正しいフラッシュが表示される" do
+        expect(page).to have_content "パスワード再設定の期限が切れています。"
+      end
+
+      it "newテンプレートへリダイレクトされること" do
+        expect(current_path).to eq new_password_reset_path
+      end
+    end
   end
 end

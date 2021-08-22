@@ -94,27 +94,8 @@ RSpec.describe "パスワード再設定", type: :request do
             }
       aggregate_failures do
         expect(is_logged_in?).to be_truthy
+        expect(user.reload.reset_digest).to eq nil
         expect(response).to redirect_to user
-      end
-    end
-  end
-
-  describe "トークンが期限切れかどうか確認(check_expirationメソッド)" do
-    context "３時間経過した場合" do
-      before do
-        user.update_attribute(:reset_sent_at, 3.hours.ago)
-        patch password_reset_path(user.reset_token),
-              params: {
-                email: user.email,
-                user: {
-                  password: "foobar",
-                  password_confirmation: "foobar",
-                },
-              }
-      end
-
-      it "newテンプレートにリダイレクトする" do
-        expect(response).to redirect_to new_password_reset_url
       end
     end
   end
