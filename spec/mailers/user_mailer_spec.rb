@@ -36,17 +36,35 @@ RSpec.describe UserMailer, type: :mailer do
     end
   end
 
-  # describe "password_reset" do
-  #   let(:mail) { UserMailer.password_reset }
+  describe "パスワード再設定" do
+    before do
+      user.create_reset_digest
+    end
 
-  #   it "renders the headers" do
-  #     expect(mail.subject).to eq("Password reset")
-  #     expect(mail.to).to eq(["to@example.org"])
-  #     expect(mail.from).to eq(["from@example.com"])
-  #   end
+    let(:mail) { UserMailer.password_reset(user) }
+    let(:mail_body_html) { mail.html_part.body.encoded }
+    let(:mail_body_text) { mail.text_part.body.encoded }
 
-  #   it "renders the body" do
-  #     expect(mail.body.encoded).to match("Hi")
-  #   end
-  # end
+    it "ユーザーあてにメールを送信すること" do
+      expect(mail.to).to eq([user.email])
+    end
+
+    it "正しい送信元からメールを送信すること" do
+      expect(mail.from).to eq(["noreply@example.com"])
+    end
+
+    it "正しい件名のメールを送信すること" do
+      expect(mail.subject).to eq("パスワードを再設定します")
+    end
+
+    it "パスワードリセットトークンが含まれること" do
+      expect(mail_body_html).to match(user.reset_token)
+      expect(mail_body_text).to match(user.reset_token)
+    end
+
+    it "ユーザーのメールアドレスが含まれること" do
+      expect(mail_body_html).to match CGI.escape(user.email)
+      expect(mail_body_text).to match CGI.escape(user.email)
+    end
+  end
 end

@@ -53,7 +53,7 @@ RSpec.describe "Users", type: :system do
     end
 
     context "ユーザー登録処理" do
-      it "有効なユーザーでユーザー登録を行うとユーザー登録成功のフラッシュが表示されること" do
+      it "有効なユーザーでユーザー登録を行うとメール送信のフラッシュが表示されること" do
         perform_enqueued_jobs do
           expect {
             fill_in "ユーザー名", with: "Example User"

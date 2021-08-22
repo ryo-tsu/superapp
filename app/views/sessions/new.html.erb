@@ -20,6 +20,6 @@
       <%= f.submit 'ログイン', class: 'btn btn-primary' %>
     <% end %>
     <br>ユーザー登録されていない方は<%= link_to 'こちら', signup_path %><br>
-    パスワードをお忘れの方は<%= link_to 'こちら', '#' %>
+    パスワードをお忘れの方は <%= link_to "こちら", new_password_reset_path %>
   </div>
 </div>
